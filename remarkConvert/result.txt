@@ -1,0 +1,12 @@
+#include <iostream>
+/* this is a test.*/
+
+/*using namespace std;*/
+using namespace std; /* std */
+
+int main()
+{
+	char a[9] = "i/* // */"; /*fdlsjakfj*/
+	cout << a << endl;
+	return 0;
+}

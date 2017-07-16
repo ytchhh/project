@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="70" tileheight="70" nextobjectid="4">
+ <tileset firstgid="1" name="Chapter1Map.png" tilewidth="70" tileheight="70" tilecount="72" columns="9">
+  <image source="Chapter1Map.png.png" width="699" height="616"/>
+ </tileset>
+ <layer name="Layer1" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmE0PgjAMhjF6EhM94onEg///J3oZSbO4j26rbed7eEJCoOuzlRXYlmXZAAAAgD/mFNDOAx5ze+wGcqJ51c7xce01gyePHLN4aNSahMeZ4Nkjda/kM/RLD+5YnH3EsgcnvjWPR8VYF4JVD1o/ntbjPig+16OHUm1wPWgMLY/R6+3FY0RsaVL1UcpNq664a+ZtPWbz2Jkea+I+yRxz3101vY+DRr1IIJF/aR/y4uGZ1DsHwPx/Q/sf1Sh69oRnOK7RedrLevOjMd5CHrV9sLdOamJSD+74LXt//B/sFY7x88jtJz29R7KHwQMe1j1uBWo9SnFaYrfOqTXgYYtZPT5EvKl5
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object id="3" name="hero" x="100" y="2552"/>
+ </objectgroup>
+</map>
