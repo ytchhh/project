@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="35" tileheight="35" nextobjectid="3">
+ <tileset firstgid="1" name="Chapter1Map_35x35" tilewidth="35" tileheight="35" tilecount="80" columns="10">
+  <image source="Chapter1Map_35x35.png" width="350" height="308"/>
+ </tileset>
+ <tileset firstgid="81" name="collidable_tile" tilewidth="35" tileheight="35" tilecount="80" columns="10">
+  <image source="collidable_tile.png" width="350" height="308"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Layer" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztlMsKgzAQRecLCq4rXdpdaZel//9fRUhoCJPHRDMZ671wUNSYOZmQhYgWAAAAAAAAAABifEbXAQ89jzDwOJ9Hr7k0PXrOZd0jFSseNbU9DXlMDfVLYqkfLR4W99VefbDicfR+xPPX1q7djxyv4H6i/LnAjZ8doz1W3o5SLPdDsg9rx2jWeosoOXD1EfFjRq/3Xuldu5aPRg/W+7vj0ZmePh/6na8e7rs5gdbeLxGerzmPIyH18Mm916g7zJaxV+bZln9vXb/UesbXGrdRHsR8J61L26M0x1k8pLHqcUkw0qMl/+IhDTx4voAlLc8=
+  </data>
+ </layer>
+ <layer name="Collidable" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztl9EKwyAMRdPuscL+/2/HwIGMxCR2xsjugTDoGuNZprZEAAAAAAAAAABGuGrszlFjdyI8DppfBx7+GhEeF81b85EeM2tl97iE6NWYBedhmZuUy811lUevbusm5Xy7Z/TQ7s/eD60H1pzVHtb7s/aj91/X5hfZDy8eDy5nNdr6sOZkYfd+vHmS3aMIOVFIzxqefdezl/2Swly7O98VHmcNkI9/700hfp2130dw0ngvHk18sL5j3cU7bhE+JaL2q964bU+080QbP8pj9N1Vm1e0h1bD+lxvPfezeqw+z62/7Y4eEQEPnhcl2wUg
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object id="1" name="hero" x="36" y="1400" width="3"/>
+ </objectgroup>
+ <layer name="biqi" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6DnsX9AW9zNQQISAAAAAAAAAKBlrgMA8NgCXi8AKw==
+  </data>
+ </layer>
+</map>

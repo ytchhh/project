@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="49" tileheight="49" nextobjectid="1">
+ <tileset firstgid="1" name="Chapter1Map.png" tilewidth="49" tileheight="49" tilecount="80" columns="10">
+  <image source="Chapter1Map.png.png" width="490" height="432"/>
+ </tileset>
+ <tileset firstgid="81" name="png_fill" tilewidth="44" tileheight="46" tilecount="20" columns="5">
+  <image source="png_fill.png" width="244" height="203"/>
+ </tileset>
+ <layer name="Layer" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3WSQrAIAxA0ey78gQdvP8duyqIlFpbhxj/4iEFkVSTqBMRBwAAAADo4lAQw2z2yvNhh4azv2KgV4xFQ+5gXK3yx3KeauiZqf21vP9AS2/qXUNPsMoriKGEJdI7nhD5i7+e3hxWangmOT3hbi5v0Ho2BTGUsEbfX/tEjfsrZ00fjF7S/6HlvqVGyzoBY1WJxhAnAAA=
+  </data>
+ </layer>
+ <layer name="Collidable" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2X3QrDIAyFHbu0sKuyZ+j7v+B2USFIoonGn8L5IDBYrTkeY2wIAAAAAAAAAABAO+c/4h3fyrNvEjty3bE7kYSW5FPNo5m8SFA+lXG7eUR1UG92WOtSPmf2P9VxBd96yOeyrk2+R0p45+6JRccqNGc61dHr7Uqe4IeGHXVY7gaJdIZaiKGtJ46E62vaMVwvWaVLyiXPR+ojXNTGU7zOFq0fpbwt84yqx9q7j0I+mrzSes/SIXl6ZL89/MjXZjRczdR0SHUgnQszqNUz1XEw46R3zcLqu+QZ5Qk6dmOHfgbGM8Pb0j560h6zniMabSvqrKcvW/Pl+qqXZk4Hd+6mOXrui9qeSufUhsd9oVWH9fmWsOKtQ/Odowmtn706NPfKGUH3p1VHaV9b8/gB/TxsRBAnAAA=
+  </data>
+ </layer>
+ <layer name="trap" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3V2wkAIAgAQBeo/cdthCAyMe7A/3wWAQAAAMCJUf0A2jNDQAa35R21BoC+/OP/0VPmJrq4lUf1TlT2YwHLZzPVECcAAA==
+  </data>
+ </layer>
+ <layer name="word" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3OSQ6AIBAFUa7oPM/e/wxuXZg4BPmC9VYkNHQZAwAAAABQW07uJycVgM6sDrhpFewcBTvxrlwdgGBk6gA41dyY7V6rgEJyYSa1tKu29A/+o9idW1kF4I9KHQDvlOqAA5E6IDCDOgCfED9811utCMMGdYf/oRAnAAA=
+  </data>
+ </layer>
+ <layer name="biqi" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3OAQkAAAwDoOV5/4CPMRiawAQAAAAAAAAAAHZcOwDUPP7/nwYQJwAA
+  </data>
+ </layer>
+ <layer name="notBiqi" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3DMQ0AAAgDsBnAv10s7IW0SRMAAAAAAAAAALhtisB/C44iAn0QJwAA
+  </data>
+ </layer>
+</map>
