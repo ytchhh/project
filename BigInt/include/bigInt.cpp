@@ -18,8 +18,8 @@ BigInt::BigInt(u_long value)
 BigInt::BigInt()
 {
 }
-BigInt::BigInt(const BigInt &bt)
-    :big(bt.big)
+
+BigInt::BigInt(const BigInt &bt):big(bt.big)
 {
 }
 BigInt::~BigInt()
@@ -235,7 +235,7 @@ BigInt& BigInt::operator*=(const BigInt &bt)
 //sign  传入传出参数
 u_char BigInt::AddItem(u_char a, u_char b, u_char &sign)
 {
-    u_char sum = a + b +sign;
+    u_char sum = a + b +sign ;
     if (sum >= 10)
     {
         sign = 1;
