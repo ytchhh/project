@@ -1,13 +1,12 @@
-#ifndef _UTILI_H
-#define _UTILI_H
-
-#include <iostream>
-#include <vector>
-#include <deque>
 #include <stdio.h>
-#include <string>
-#include <cmath>
-using namespace std;
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include "./BigInt/BigInt.h"
 
-
-#endif
+#define PORT 5050
+#define IP_ADDRESS "127.0.0.1"
+#define LISTEN_QUEUE_SIZE 5
