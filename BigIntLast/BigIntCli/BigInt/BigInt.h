@@ -17,7 +17,7 @@ public:
 	~BigInt();						//析构函数
 public:
 	void show();					//打印函数
-	void clear();					//清理函数
+	void clear();					//清空数据函数
 public:
 	static void Add(BigInt &bt,BigInt &bt1,BigInt &bt2);	//加法
 	static void Sub(BigInt &bt,BigInt &bt1,BigInt &bt2);	//减法

@@ -5,7 +5,7 @@
 	客户端 采用
 */
 
-typedef enum {ADD,SUB,DIV,QUIT}OPER_ENUM;	//操作符
+typedef enum {ADD,SUB,DIV,MUL,QUIT}OPER_ENUM;	//操作符
 
 typedef struct BigIntOper					//将要计算的数据值传送地址，能提高效率
 {
@@ -14,10 +14,10 @@ typedef struct BigIntOper					//将要计算的数据值传送地址，能提高
 	BigInt *bt2;				//计算的数2
 }BigIntOper;
 
-void SendData(int sock,BigIntOpr *pBig)				//发送数据
+void SendData(int sock,BigIntOper *pBig)				//发送数据
 {
 	char sendbuf[BUFFER_SIZE];
-	
+	memset(sendbuf,0,BUFFER_SIZE);
 	int comm = pBig->command;
 	long data_len = pBig->bt1->size();
 	char temp[data_len];
@@ -25,7 +25,7 @@ void SendData(int sock,BigIntOpr *pBig)				//发送数据
 	send(sock,(char*)&data_len,sizeof(long),0);		//发送bt1数据的长度
 	
 	for(int i = 0; i < data_len; ++i)
-		temp[i] = bt1[i];
+		temp[i] = (*pBig->bt1)[i];
 
 	memcpy(sendbuf,temp,data_len);
 	
@@ -35,7 +35,7 @@ void SendData(int sock,BigIntOpr *pBig)				//发送数据
 	data_len = pBig->bt2->size();
 	send(sock,(char*)&data_len,sizeof(long),0);
 	for(int i = 0; i < data_len; ++i)
-		temp[i] = bt2[i];
+		temp[i] = (*pBig->bt2)[i];
 	memcpy(sendbuf,temp,data_len);
 	send(sock,sendbuf,data_len,0);
 	cout<<"send bt2 over!"<<endl;
@@ -43,15 +43,15 @@ void SendData(int sock,BigIntOpr *pBig)				//发送数据
 
 void RecvData(int sockCli,BigInt &bt)			//接受数据
 {
+	bt.clear();
 	char recvbuf[BUFFER_SIZE];
 	long data_len;
-	long length;
 	memset(recvbuf,0,BUFFER_SIZE);
-	recv(sockCli,(char*)data_len,sizeof(long),0);
+	recv(sockCli,(char*)&data_len,sizeof(long),0);
 	
-	length = recv(sockCli,recvbuf,BUFFER_SIZE,0);
+	recv(sockCli,recvbuf,data_len,0);
 
-	for(long i = 0; i < length; ++i)
+	for(long i = 0; i < data_len; ++i)
 		bt.push_back(recvbuf[i]);
 }
 
@@ -87,16 +87,17 @@ int main()
 	long n;
 	
 	BigInt bt1,bt2;
+	string str1,str2;
 	BigIntOper bo;
 	BigInt bt;
 	while(select)
 	{
-		cout<<"welcome to BigInt                                  "<<endl;
+		cout<<"|               welcome to BigInt                 |"<<endl;
 		cout<<"|-------------------------------------------------|"<<endl;
 		cout<<"|[1]输入两个大数         [2]显示两个大数          |"<<endl;
-		cout<<"|[3]bt = bt1+bt2		    [4]bt = bt1-bt2          |"<<endl;
+		cout<<"|[3]bt = bt1+bt2         [4]bt = bt1-bt2          |"<<endl;
 		cout<<"|[5]bt = bt1*bt2         [6]bt = bt1/bt2          |"<<endl;
-		cout<<"[0]退出系统"<<endl;
+		cout<<"|[0]退出系统                                      |"<<endl;
 		cout<<"|-------------------------------------------------|"<<endl;
 		cout<<"请输入选择:>";
 		cin>>select;
@@ -104,14 +105,11 @@ int main()
 		{
 			case 1:
 				cout<<"请输入要加载的第一个大数:>";
-				string str1,str2;
 				cin>>str1;
-				BigInt bt3(str1);
 				cout<<"请输入要加载的第二个大数:>";
 				cin>>str2;
-				BigInt bt4(str2);
-				bt1 = bt3;
-				bt2 = bt4;
+				bt1 = str1;
+				bt2 = str2;
 				break;
 			case 2:
 				cout<<"bt1 = ";
@@ -121,14 +119,16 @@ int main()
 				break;
 			case 3:
 				bo.command = ADD;
+				bt.clear();
 				bo.bt1 = &bt1;
 				bo.bt2 = &bt2;
 				SendData(sockCli,&bo);
 				RecvData(sockCli,bt);
 				break;
 			case 4:
+				bt.clear();
 				bo.command = SUB;
-				bo.bt1 = &bt1;
+				t1 = &bt1;
 				bo.bt2 = &bt2;
 				SendData(sockCli,&bo);
 				RecvData(sockCli,bt);
@@ -138,8 +138,11 @@ int main()
 			default:
 				break;
 		}
-		cout<<"result = ";
-		bt.show();
+		if(select >= 3 && select <= 6)
+		{
+			cout<<"result = ";
+			bt.show();
+		}
 	}
 	close(sockCli);
 	return 0;

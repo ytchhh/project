@@ -4,7 +4,7 @@
 	服务器端
 */
 
-typedef enum {ADD,SUB,DIV,QUIT}OPER_ENUM;	//操作符
+typedef enum {ADD,SUB,DIV,MUL,QUIT}OPER_ENUM;	//操作符
 
 typedef struct BigIntOper
 {
@@ -14,36 +14,69 @@ typedef struct BigIntOper
 }BigIntOper;
 
 
-void SendData(int sock,BigInt &bt)		//发送数据
+
+void SendData(int sock,BigInt *pbt)		//发送数据
 {
 	char sendbuf[BUFFER_SIZE];
-	long data_len;
+	long data_len = pbt->size();
 	memset(sendbuf,0,BUFFER_SIZE);
-	send(sock,(char*)data_len,sizeof(long),0);
-	send(sock,sendbuf,BUFFER_SIZE,0);
+	for(long i = 0 ; i < data_len; ++i)
+		sendbuf[i] = (*pbt)[i];
+	send(sock,(char*)&data_len,sizeof(long),0);
+	send(sock,sendbuf,data_len,0);
 }
 
-void RecvData(int sock,BigIntOper *pBig)	//接受数据
+void RecvData(int sock,BigInt &bt)	//接受数据
 {
 	char recvbuf[BUFFER_SIZE];
-
-	int comm = recv(sock,(char*)comm,sizeof(comm),0);
+	//bt.show();
+	bt.clear();
 	long data_len;
-	recv(sock,(char*)data_len,sizeof(long),0);
-	char temp[data_len];
-	recv(sock,recvbuf,data_len,0);
-	for(int i = 0; i < data_len; ++i)
-		pBig->bt1->push_back(recvbuf[i]);
-	cout<<"recvive bt1 over"<<endl;
-
 	recv(sock,(char*)&data_len,sizeof(long),0);
 	recv(sock,recvbuf,data_len,0);
 	for(int i = 0; i < data_len; ++i)
-		pBig->bt2->push_back(recvbuf[i]);
-	cout<<"recvive bt2 over"<<endl;
+		bt.push_back(recvbuf[i]);
+	cout<<"recvive bt over"<<endl;
 }
 
 
+void BigIntServer(int sockSer)			//服务器所做的工作
+{
+	int comm;
+	int sockConn = sockSer;
+	BigInt bt;
+	BigInt bt1;
+	BigInt bt2;
+	while(1)
+	{
+		recv(sockConn,(char*)&comm,sizeof(int),0);		//接受操作符
+		cout<<"command : "<<comm<<endl;
+		RecvData(sockConn,bt1);
+		cout<<"bt1 = ";
+		bt1.show();
+		RecvData(sockConn,bt2);
+		cout<<"bt2 = ";
+		bt2.show();
+		switch(comm)
+		{
+			case ADD:
+				BigInt::Add(bt,bt1,bt2);
+				break;
+			case SUB:
+				BigInt::Sub(bt,bt1,bt2);
+				break;
+			case MUL:
+				break;
+			case DIV:
+				break;
+			default:
+				break;
+		}
+		SendData(sockConn,&bt);
+	}
+	close(sockConn);
+
+}
 
 int main()
 {
@@ -77,8 +110,6 @@ int main()
 		exit(1);
 	}
 	
-	BigInt bt1,bt2,bt;
-	BigIntOper bo;
 	pid_t childpid;
 	printf("Server wait Connect...........\n");
 	//服务器阻塞，直到客户端建立连接
@@ -93,21 +124,9 @@ int main()
 		}
 		else
 			printf("Server Accept Client OK\n");
-		if( (childpid = fork()) == 0)
-		{
-			RecvData(sock,&bo);
-			switch(bo->command)
-			{
-				case Add:
-					bt = bo->bt1 + bo->bt2;
-					break;
-				default:
-					break;
-			}
-			SendData(sock,bt);
+		if( (childpid = fork()) ==  0)
+			BigIntServer(sockConn);
 			//////////////////////////
-			exit(0);
-		}
 		close(sockConn);
 	}
 	close(sockSer);

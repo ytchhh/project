@@ -60,8 +60,7 @@ BigInt::~BigInt()			//析构函数
 {
 }
 
-
-void BigInt::clear()		//清楚函数
+void BigInt::clear()		//清空大数函数
 {
 	de.clear();
 }
