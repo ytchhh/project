@@ -10,10 +10,11 @@ int main()
 	printf("Content-Type:text/html\n\n");
 	printf("<html>");
 	printf("<head>");
+	printf("<meta charset=utf-8>");
 	
-	printf("<title> result </title>");
+	printf("<title>计算结果</title>");
 	printf("<body>");
-	printf("<H1 align=center>Hello World</H1>");
+	printf("<H1 align=center>计算结果</H1>");
 
 	char x[BUFFER_SIZE],y[BUFFER_SIZE];
 	int cmd;
@@ -91,11 +92,8 @@ int main()
 	int j = 1;
 	char str[i];
 	str[0] = bt[0];
-	if()
 	for(i = bt.size(); i > 1; --i,++j)
 	{
-		
-
 		str[j] = bt[i-1];
 	}
 	str[j] = '\0';
