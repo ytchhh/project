@@ -34,6 +34,7 @@ int main()
 	*/
 	//189654332887744
 	//-9876543247788999
+	/*
 	string str1;
 	cout<<"please input data:";
 	cin>>str1;
@@ -51,5 +52,18 @@ int main()
 	BigInt bt4;
 	BigInt::Sub(bt4,bt1,bt2);
 	bt4.show();
+	*/
+
+	string str1;
+	string str2;
+	cout<<"please input data:";
+	cin>>str1;
+	cout<<"please input data:";
+	cin>>str2;
+	BigInt bt1(str1);
+	BigInt bt2(str2);
+	BigInt bt3;
+	BigInt::Mul(bt3,bt1,bt2);
+	bt3.show();
 	return 0;
 }

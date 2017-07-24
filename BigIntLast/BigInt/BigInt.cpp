@@ -123,6 +123,24 @@ size_t BigInt::size()const					//求个数
 	return de.size();
 }
 
+char BigInt::back()				//返回大数的头
+{
+	return de.back();
+}
+
+void BigInt::pop_back()			//删除队列尾部的元素
+{
+	de.pop_back();
+}
+
+void BigInt::clear_head_zero()		//清除队列的头部0元素
+{
+	while(back() == 0 && size() > 2)
+	{
+		pop_back();
+	}
+}
+
 char& BigInt::operator[](int position)	//重载[]
 {
 	return de[position];
@@ -325,3 +343,109 @@ void BigInt::Sub(BigInt &bt,BigInt &bt1,BigInt &bt2)			//减法 bt = bt1-bt2
 	}
 }
 
+void BigInt::MulItem(BigInt &temp,BigInt &bt1,char x)	//将大数和一位数相乘
+{
+	char mul,sign = 0;
+	size_t i = 1;
+	while(i < bt1.size())
+	{
+		mul = (bt1[i]-48) * (x-48) + sign;
+		if(mul >= 10)
+		{
+			sign = mul/10;
+			mul %= 10;
+		}
+		else
+			sign = 0;
+		temp.push_back(mul+48);
+		++i;
+	}
+	if(sign > 0)
+		temp.push_back(sign+48);
+	temp.push_front('+');
+}
+
+
+void BigInt::AddMove(BigInt &bt,BigInt &temp,int offset)	//模拟手算乘法
+{
+	char sign = 0;
+	size_t j = 1;
+	size_t i = offset;
+	while(i < bt.size() && j < temp.size())
+	{
+		bt[i] = AddItem(bt[i],temp[j],sign);
+		++i;
+		++j;
+	}
+	while(i < bt.size())
+	{
+		bt[i] = AddItem(bt[i],'0',sign);
+		++i;
+	}
+	while(j < temp.size())
+	{
+		char sum = AddItem('0',temp[j],sign);
+		bt.push_back(sum);
+		++j;
+	}
+	if(sign > 0)
+		bt.push_back(sign+'0');
+}
+
+void BigInt::Mul(BigInt &bt,BigInt &bt1,BigInt &bt2)		//乘法
+{
+	BigInt temp;
+	bt.push_back('+');
+	for(int i = 1; i < bt2.size(); ++i)
+	{
+		temp.clear();
+		MulItem(temp,bt1,bt2[i]);
+		AddMove(bt,temp,i);
+	}
+	if(bt1[0] == bt2[0])
+		bt[0] = '+';
+	else
+		bt[0] = '-';
+}
+
+void BigInt::Div(BigInt &bt,BigInt &bt1,BigInt &bt2)		//除法
+{
+	if(bt1 < bt2)
+		bt = 0;
+	else if(bt1 == bt2)
+	{
+		if(bt1[0] == bt[0])
+			bt = 1;
+		else
+			bt = -1;
+	}
+	else
+	{
+		size_t bt1_len = bt1.size();
+		size_t bt2_len = bt2.size();
+		int k = bt1_len - bt2_len;
+
+		BigInt btd;
+		for(size_t i = 1; i <= bt2.size(); ++i)
+		{
+			btd.push_back(bt1[i+k]);
+		}
+		char div = 0;
+		while(k >= 0)
+		{
+			while(btd >= bt2)
+			{
+				btd -= bt2;
+				div++;
+				btd.clear_head_zero();
+			}
+			bt.push_front(div);
+			div = 0;
+			if(k > 0)
+				btd.push_front(bt1[k]);
+			--k;
+			btd.clear_head_zero();
+		}
+		btd.clear_head_zero();
+	}
+}

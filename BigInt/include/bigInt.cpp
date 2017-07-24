@@ -431,7 +431,7 @@ void BigInt::Div(BigInt &bt, const BigInt &bt1, const BigInt &bt2)
 }
 void BigInt::Mod(BigInt &bt, const BigInt &bt1, const BigInt &bt2)
 {
-    assert(bt2 != 0); 
+    asser(bt2 != 0); 
     bt.clear();
     if (bt1 < bt2)
         bt = bt1;

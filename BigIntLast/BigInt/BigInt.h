@@ -25,7 +25,9 @@ public:
 	static void Div(BigInt &bt,BigInt &bt1,BigInt &bt2);	//除法
 private:
 	static char AddItem(char a,char b,char& sign);			//每个位相加
-	static char SubItem(char a,char b,char& sign);		//每个位相减
+	static char SubItem(char a,char b,char& sign);			//每个位相减
+	static void MulItem(BigInt &temp,BigInt &bt1,char x);	//将大数和一位数相加
+	static void AddMove(BigInt &bt,BigInt &temp,int offset);//模拟手算乘法
 public:
 	//重载函数
 	char& operator[](int position);				//重载[]
@@ -35,6 +37,9 @@ public:
 	bool operator<(const BigInt &bt)const;		//重载<
 	void push_back(char element);						//尾插函数
 	void push_front(char element);					//头插函数
+	char back();								//返回大数的头
+	void pop_back();							//删除队列尾部的元素
+	void clear_head_zero();						//清除队列头部的0元素
 	size_t size()const;							//求个数
 };
 
