@@ -24,13 +24,14 @@
 #include <sys/stat.h>
 #include <pthread.h>
 #include <sys/wait.h>
+#include <sys/select.h>
 #include <stdlib.h>
 
 #define ISspace(x) isspace((int)(x))
 
 #define SERVER_STRING "Server: jdbhttpd/0.1.0\r\n"
 
-void* accept_request(void*);
+void accept_request(int arg);
 void bad_request(int);
 void cat(int, FILE *);
 void cannot_execute(int);
@@ -49,9 +50,9 @@ void unimplemented(int);
  * Parameters: the socket connected to the client */
 /**********************************************************************/
 //pthread_create(&tid,NULL,accept_requst,NULL);
-void* accept_request(void* arg)
+void accept_request(int arg)
 {
-	int client = *(int*)arg;
+	int client = arg;
     char buf[1024];
     int numchars;
     char method[255];
@@ -77,7 +78,7 @@ void* accept_request(void* arg)
     if (strcasecmp(method, "GET") && strcasecmp(method, "POST"))
     {
         unimplemented(client);
-        return NULL;
+        return ;
     }
 
     /* POST 的时候开启 cgi */
@@ -523,7 +524,7 @@ void unimplemented(int client)
     sprintf(buf, "HTTP/1.0 501 Method Not Implemented\r\n");
     send(client, buf, strlen(buf), 0);
     /*服务器信息*/
-	/*
+	
     sprintf(buf, SERVER_STRING);
     send(client, buf, strlen(buf), 0);
     sprintf(buf, "Content-Type: text/html\r\n");
@@ -538,34 +539,98 @@ void unimplemented(int client)
     send(client, buf, strlen(buf), 0);
     sprintf(buf, "</BODY></HTML>\r\n");
     send(client, buf, strlen(buf), 0);
-	*/
+	
 }
 
 /**********************************************************************/
 
+#define MAX_CLIENT_NUM 5
+
 int main(void)
 {
-    int server_sock = -1;
+    int server_sock = -1,sockConn;
     u_short port = 8888;
     int client_sock = -1;
     struct sockaddr_in client_name;
     socklen_t client_name_len = sizeof(client_name);
-    pthread_t newthread;
-
+	
+	int client_fd[MAX_CLIENT_NUM] = {0};
     /*在对应端口建立 httpd 服务*/
     server_sock = startup(&port);
     printf("httpd running on port %d\n", port);
 
+	fd_set read_fds;
+	
+	/*
+	client_sock = accept(server_sock,(struct sockaddr *)&client_name,&client_name_len);
+    if (client_sock == -1)
+    	error_die("accept");
+	*/
+
+	int max_sock = server_sock;
+	int client_conn_num = 0;
+
     while (1)
     {
-        /*套接字收到客户端连接请求*/
-        client_sock = accept(server_sock,(struct sockaddr *)&client_name,&client_name_len);
-        if (client_sock == -1)
-            error_die("accept");
-        /*派生新线程用 accept_request 函数处理新请求*/
+		FD_ZERO(&read_fds);
+		FD_SET(client_sock,&read_fds);
+        for(int i = 0; i < MAX_CLIENT_NUM; ++i)
+		{
+			if(client_fd[i] != 0)
+			{
+				FD_SET(client_fd[i],&read_fds);
+			}
+		}
+		int ret = select(max_sock+1,&read_fds,NULL,NULL,NULL);
+		if(ret == -1)
+		{
+			perror("select");
+			continue;
+		}
+		else if(ret == 0)
+		{
+			perror("select time out");
+			continue;
+		}
+		else
+		{
+			if(FD_ISSET(server_sock,&read_fds))
+			{
+				sockConn = accept(server_sock,(struct sockaddr*)&client_name,&client_name_len);
+				if(sockConn == -1)
+				{
+					printf("Server Accept Connect Fail.\n");
+				}
+				else
+				{
+					if(client_conn_num >= MAX_CLIENT_NUM)
+					{
+						printf("Serve OverLoad\n");
+						continue;
+					}
+					printf("Server Accept Connect OK\n");
+					client_fd[client_conn_num++] = sockConn;
+					if(sockConn > max_sock)
+						max_sock = sockConn;
+
+				}
+				continue;
+			}
+			for(int i = 0; i < client_conn_num; ++i)
+			{
+				if(FD_ISSET(client_fd[i],&read_fds))
+					accept_request(sockConn);
+			}
+		}
+
+
+		/*派生新线程用 accept_request 函数处理新请求*/
         /* accept_request(client_sock); */
+		/*
         if (pthread_create(&newthread , NULL, accept_request, &client_sock) != 0)
             perror("pthread_create");
+		*/
+
     }
 
     close(server_sock);
