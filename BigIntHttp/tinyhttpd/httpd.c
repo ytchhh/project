@@ -523,7 +523,7 @@ void unimplemented(int client)
     sprintf(buf, "HTTP/1.0 501 Method Not Implemented\r\n");
     send(client, buf, strlen(buf), 0);
     /*服务器信息*/
-	/*
+	
     sprintf(buf, SERVER_STRING);
     send(client, buf, strlen(buf), 0);
     sprintf(buf, "Content-Type: text/html\r\n");
@@ -538,7 +538,7 @@ void unimplemented(int client)
     send(client, buf, strlen(buf), 0);
     sprintf(buf, "</BODY></HTML>\r\n");
     send(client, buf, strlen(buf), 0);
-	*/
+	
 }
 
 /**********************************************************************/
