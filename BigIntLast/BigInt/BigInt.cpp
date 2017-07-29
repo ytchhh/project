@@ -201,6 +201,28 @@ bool BigInt::operator<(const BigInt &bt)const	//重载<
 	return false;
 }
 
+BigInt& BigInt::operator-(const BigInt &bt)		//重载-
+{
+	BigInt bt1;
+	Sub(bt1,*this,bt1);
+	*this = bt1;
+	return *this;
+}
+
+BigInt& BigInt::operator-=(const BigInt &bt)  //重载-=
+{
+	*this = *this - bt;
+	return *this;
+}
+
+bool BigInt::operator>=(const BigInt &bt)const //重载 >=
+{
+	if(*this < bt)
+		return false;
+	else
+		return true;
+}
+
 char BigInt::AddItem(char a,char b,char& sign)	//每个位相加
 {
 	char sum = a + b + sign - 96;	//加上进位的sign
@@ -426,6 +448,7 @@ void BigInt::Div(BigInt &bt,BigInt &bt1,BigInt &bt2)		//除法
 		int k = bt1_len - bt2_len;
 
 		BigInt btd;
+		btd.push_back('+');
 		for(size_t i = 1; i <= bt2.size(); ++i)
 		{
 			btd.push_back(bt1[i+k]);
@@ -439,7 +462,7 @@ void BigInt::Div(BigInt &bt,BigInt &bt1,BigInt &bt2)		//除法
 				div++;
 				btd.clear_head_zero();
 			}
-			bt.push_front(div);
+			bt.push_front(div+'0');
 			div = 0;
 			if(k > 0)
 				btd.push_front(bt1[k]);

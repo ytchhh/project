@@ -35,8 +35,12 @@ public:
 	bool operator==(const BigInt &bt)const;		//重载==
 	bool operator>(const BigInt &bt)const;		//重载>
 	bool operator<(const BigInt &bt)const;		//重载<
+	bool operator>=(const BigInt &bt)const;		//重载>=
+	BigInt& operator-(const BigInt &bt);			//重载-
+	BigInt& operator-=(const BigInt &bt);		//重载-=
 	void push_back(char element);						//尾插函数
 	void push_front(char element);					//头插函数
+
 	char back();								//返回大数的头
 	void pop_back();							//删除队列尾部的元素
 	void clear_head_zero();						//清除队列头部的0元素

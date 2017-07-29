@@ -65,5 +65,8 @@ int main()
 	BigInt bt3;
 	BigInt::Mul(bt3,bt1,bt2);
 	bt3.show();
+	BigInt bt4;
+	BigInt::Div(bt4,bt1,bt2);
+	bt4.show();
 	return 0;
 }

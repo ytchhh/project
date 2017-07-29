@@ -544,7 +544,7 @@ void unimplemented(int client)
 /**********************************************************************/
 
 
-#define MAX_CLIENT_NUM 5
+#define MAX_CLIENT_NUM 1024
 
 int main(void)
 {
@@ -617,68 +617,5 @@ int main(void)
     close(server_sock);
     return 0;
 }
-
-
-/*
-#define MAX_CLIENT_NUM 5
-int main(void)
-{
-		int server_sock = -1;
-		u_short port = 9737;
-		int client_sock = -1;
-		struct sockaddr_in client_name;
-		socklen_t client_name_len = sizeof(client_name);
-
-		server_sock = startup(&port);
-		printf("httpd running on port %d\n", port);
-		int client_fd[MAX_CLIENT_NUM]={0};
-		fd_set set;
-		int client_conn_num =0;
-		int max_sock=server_sock;
-		int res;
-		int i;
-		while(1)
-		{
-				FD_ZERO(&set);
-				FD_SET(server_sock,&set);
-				res = select(max_sock+1,&set,NULL,NULL,NULL);
-				if(res == -1)
-				{
-						printf("Select Failed\n");
-						continue;
-				}
-				else if(res == 0)
-				{
-						printf("Select timeout\n");
-						continue;
-				}
-				else
-				{
-						if(FD_ISSET(server_sock,&set))
-						{
-								if(client_sock > MAX_CLIENT_NUM)
-								{
-										printf("Server OverLoad\n");
-										break;
-								}
-								int client_sock = accept(server_sock,(struct sockaddr*)&client_name,&client_name_len);
-								FD_SET(client_sock,&set);
-								client_fd[client_conn_num++]=client_sock;
-								if(client_sock>max_sock)
-										max_sock=client_sock;
-						}
-						for(i =0;i<MAX_CLIENT_NUM;++i)
-						{
-								if(FD_ISSET(client_fd[i],&set))
-								{
-										accept_request(&client_sock);
-								}
-						}
-				}
-		}
-		close(server_sock);
-		return(0);
-}
-*/
 
 
