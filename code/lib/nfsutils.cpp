@@ -1,0 +1,134 @@
+#include <sys/types.h>
+#include <unistd.h>
+
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "strutils.h"
+#include "nfsutils.h"
+
+int nfsstart()
+{
+    string cmd("systemctl start nfs.service >/dev/null 2>&1");
+    int ret = system(cmd.c_str());
+    return ret;
+}
+
+
+int nfsstop()
+{
+    string cmd("systemctl stop nfs.service >/dev/null 2>&1");
+    int ret = system(cmd.c_str());
+    return ret;
+}
+
+int nfsstatus()
+{
+    string cmd("systemctl status nfs.service >/dev/null 2>&1");
+    int ret = system(cmd.c_str());
+    return ret;
+}
+
+int confignfs(string sharedir, string nfsopts)
+{
+    string line;
+    line = sharedir + " " + nfsopts;
+    string filename("/etc/exports"); 
+
+
+    //open()
+    //write()
+    //close()
+    /*
+     1. manupulate the "/etc/exports" with linux system calls
+     a. open
+     . close
+     c. read
+     d. write
+
+     2. manupulate the "/etc/exports" with c FILE related apis
+     a. fopen 
+     b. fwrite
+     c. fread
+     d. fclose
+
+     3. manupulate the "/etc/exports" with c++ ifstream/ofstream apis
+     a. ifstream
+     b. ofstream
+     c. operator "<<"
+     d. operator ">>"
+
+     string utils 
+     1. int startswith(string lhs, string rhs);
+     2. int endswith(string lhs, string rhs);
+     intstr="a,bc,cc,ddd,eff", separator=","
+     {"a", "bc", "cc", "dd", "eff"}
+     3. vector<string> split(string inputstr, string separator)
+     4. int join(vector<string> strvec, string separator)
+
+     */
+
+    return 0;
+}
+
+//client side 
+int mountnfs(string nfsloc, string sharedir, 
+        string mpt, string mountopts)
+{
+    string cmd("mount ");
+
+    cmd += mountopts + nfsloc + ":" + sharedir + " " + mpt; 
+
+    cout << "mount cmd: " << cmd << endl;
+
+    int ret = system(cmd.c_str());
+
+    return ret;
+}
+
+int ismounted(string nfsloc, string sharedir, string mpt)
+{
+    string cmd("mount |grep ");
+    cmd += "'" + nfsloc + ":" + sharedir + "'";
+
+    int ret = system(cmd.c_str());
+    
+    if(ret != 0)
+    {
+        return ret;
+    }
+
+    FILE* output = popen(cmd.c_str(), "r" );
+    char buff[512];
+    memset(buff, 0, 512);
+
+    int nread = fread(buff, sizeof(char), 512, output);
+    fclose(output);
+
+    cout << buff << endl;
+    
+    string content(buff); 
+    string mountstr = nfsloc+":"+sharedir + " on " + mpt;
+
+    ret = startswith(content, mountstr);
+
+    return ret;
+}
+
+int umount(string mpt, int isforce)
+{
+    string cmd("umount");
+    if(isforce)
+    {
+        cmd += " -f ";
+    }
+    cmd += mpt;
+    int ret = system(cmd.c_str());
+    return ret;
+}
