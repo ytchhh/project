@@ -68,5 +68,11 @@ int main()
 	BigInt bt4;
 	BigInt::Div(bt4,bt1,bt2);
 	bt4.show();
+	BigInt bt5;
+	BigInt::Mod(bt5,bt1,bt2);
+	bt5.show();
+	BigInt bt6;
+	BigInt::Power(bt6,bt1,bt2);
+	bt6.show();
 	return 0;
 }

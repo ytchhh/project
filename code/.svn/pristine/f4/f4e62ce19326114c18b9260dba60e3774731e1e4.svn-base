@@ -1,0 +1,116 @@
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <string.h>
+
+
+#include <fstream>
+#include <iostream>
+#include<unistd.h>
+#include<stdio.h>
+#include<sys/socket.h>
+#include<netinet/in.h>
+#include<stdlib.h>
+#include<sys/types.h>
+#include<string.h>
+#include<arpa/inet.h>
+
+#define SERVER_IP  "192.168.51.211"
+#define SERVER_PORT 10001
+
+#define LISTEN_QUEUE_SIZE 5
+#define MAX_BUFFER_SIZE   255
+
+
+struct Message 
+{
+    int cmd;
+    char tag[0];
+};
+
+using namespace std;
+
+int main(int argc, char** argv)
+{
+    string machines;
+    int opt;
+
+    int cmd = 0;
+    int a = 0;
+    while ((opt = getopt(argc, argv, "fpum:")) != -1) {
+        switch (opt) {
+            case 'f':
+                cout << "f is set " << endl;
+                a = 1;
+                cmd = cmd | a;
+                break;
+            case 'p':
+                cout << "p is set " << endl;
+                a = 1;
+                a = a << 1;
+                cmd = cmd | a;
+
+                break;
+            case 'u':
+                cout << "u is set " <<endl;
+                a = 1;
+                a = a << 2;
+                cmd = cmd | a;
+                break;
+            case 'm':
+                machines = optarg;
+                cout << machines << endl;
+                break;
+            default: /* '?' */
+                cerr << "error" <<endl;
+                exit(EXIT_FAILURE);
+        }
+    }
+
+
+
+    cout << "cmd: " << cmd << endl;
+
+    int bufflen = sizeof(Message) + machines.length();
+    char* pbuff = (char*)malloc(bufflen + 1);
+
+    memset(pbuff, 0, bufflen);
+    pbuff[bufflen] = '\0';
+
+    Message* pmsg = (Message*)pbuff;
+    pmsg->cmd = cmd;
+    
+    memcpy(pmsg->tag, machines.c_str(), machines.length());
+
+    //send the message
+    //send(sockfd, pmsg, bufflen+1, 0);
+    cout << "buffer:" <<  pmsg->cmd << endl;
+    cout << "buffer machine:" <<  pmsg->tag << endl;
+
+    int sockCli = socket(AF_INET, SOCK_DGRAM, 0);
+    if(sockCli == -1)
+    {
+        perror("socket");
+    }
+
+    struct sockaddr_in addrSer,addrCli;
+    addrSer.sin_family = AF_INET;
+    addrSer.sin_port = htons(SERVER_PORT);
+    addrSer.sin_addr.s_addr = inet_addr(SERVER_IP);
+
+    socklen_t len = sizeof(struct sockaddr);
+    char sendbuf[MAX_BUFFER_SIZE];
+    char recvbuf[MAX_BUFFER_SIZE];
+
+    sendto(sockCli, sendbuf, strlen(sendbuf)+1, 0, (struct sockaddr*)&addrSer, len);
+
+    close(sockCli);
+
+    cout << "endl " << endl;
+
+    exit(EXIT_SUCCESS);
+}

@@ -45,6 +45,28 @@ BigInt::BigInt(string &str)		//字符串构造函数
 	}
 }
 
+BigInt& BigInt::operator++()
+{
+	char sign = 1;
+	size_t i = 1;
+	while(sign>0 && i <= size())
+	{
+		(*this)[i] = AddItem((*this)[i],'0',sign);
+		++i;
+	}
+	if(sign > 0)
+		push_back(sign);
+	return *this;
+}
+
+BigInt& BigInt::operator++(int)
+{
+	BigInt temp = *this;
+	++*this;
+	return temp;
+}
+
+
 BigInt::BigInt(const BigInt& bt):de(bt.de)			//拷贝构造函数
 {
 }
@@ -128,6 +150,11 @@ char BigInt::back()				//返回大数的头
 	return de.back();
 }
 
+void BigInt::pop_front()		//删除队列头部的元素
+{
+	de.pop_front();
+}
+
 void BigInt::pop_back()			//删除队列尾部的元素
 {
 	de.pop_back();
@@ -135,7 +162,7 @@ void BigInt::pop_back()			//删除队列尾部的元素
 
 void BigInt::clear_head_zero()		//清除队列的头部0元素
 {
-	while(back() == 0 && size() > 2)
+	while(back() == '0' && size() > 2)
 	{
 		pop_back();
 	}
@@ -163,6 +190,14 @@ bool BigInt::operator==(const BigInt &bt)const	//重载==
 		++i;
 	}
 	return true;
+}
+
+BigInt& BigInt::operator*=(BigInt &bt)
+{
+	BigInt temp;
+	BigInt::Mul(temp,*this,bt);
+	*this = temp;
+	return *this;
 }
 
 bool BigInt::operator>(const BigInt &bt)const	//重载>
@@ -201,15 +236,15 @@ bool BigInt::operator<(const BigInt &bt)const	//重载<
 	return false;
 }
 
-BigInt& BigInt::operator-(const BigInt &bt)		//重载-
+BigInt& BigInt::operator-(BigInt &bt)		//重载-
 {
 	BigInt bt1;
-	Sub(bt1,*this,bt1);
+	Sub(bt1,*this,bt);
 	*this = bt1;
 	return *this;
 }
 
-BigInt& BigInt::operator-=(const BigInt &bt)  //重载-=
+BigInt& BigInt::operator-=(BigInt &bt)  //重载-=
 {
 	*this = *this - bt;
 	return *this;
@@ -436,39 +471,111 @@ void BigInt::Div(BigInt &bt,BigInt &bt1,BigInt &bt2)		//除法
 		bt = 0;
 	else if(bt1 == bt2)
 	{
-		if(bt1[0] == bt[0])
+		if(bt1[0] == bt2[0])
 			bt = 1;
 		else
 			bt = -1;
 	}
 	else
 	{
+		BigInt bt4 = bt2;
+		bt4[0] = '+';
 		size_t bt1_len = bt1.size();
 		size_t bt2_len = bt2.size();
 		int k = bt1_len - bt2_len;
 
 		BigInt btd;
 		btd.push_back('+');
-		for(size_t i = 1; i <= bt2.size(); ++i)
+		for(size_t i = 1; i < bt2.size(); ++i)
 		{
 			btd.push_back(bt1[i+k]);
 		}
 		char div = 0;
 		while(k >= 0)
 		{
-			while(btd >= bt2)
+			while(btd >= bt4)
 			{
-				btd -= bt2;
+				btd -= bt4;
 				div++;
 				btd.clear_head_zero();
 			}
 			bt.push_front(div+'0');
 			div = 0;
 			if(k > 0)
+			{
+				btd.pop_front();
 				btd.push_front(bt1[k]);
+				btd.push_front('+');
+			}
 			--k;
 			btd.clear_head_zero();
 		}
+		if(bt1[0] != bt2[0])
+			bt.push_front('-');
+		else
+			bt.push_front('+');
+		bt.clear_head_zero();
 		btd.clear_head_zero();
+	}
+}
+
+void BigInt::Mod(BigInt &bt,BigInt &bt1,BigInt &bt2)	//求模
+{
+	bt = 0;
+	if(bt1 < bt2)
+		bt = bt1;
+	else if(bt1 == bt2)
+		bt = 0;
+	else
+	{
+		size_t bt1_len = bt1.size();
+		size_t bt2_len = bt2.size();
+		BigInt bt3 = bt2;
+		bt3[0] = '+';
+		int k = bt1_len - bt2_len;
+		BigInt btd;
+		btd.push_front('+');
+		for(size_t i = 0; i < bt2.size(); ++i)
+			btd.push_back(bt1[i+k]);
+
+		while(k >= 0)
+		{
+			while(btd >= bt3)
+			{
+				btd -= bt3;
+				btd.clear_head_zero();
+			}
+			if(k > 0)
+			{
+				btd.pop_front();
+				btd.push_front(bt1[k]);
+				btd.push_front('+');
+			}
+			--k;
+		}
+		bt = btd;
+		bt.clear_head_zero();
+	}
+}
+
+void BigInt::Power(BigInt &bt,BigInt &bt1,long n)
+{
+	bt.push_back('+');
+	bt.push_back('1');
+	for(long i = 0; i < n; ++i)
+	{
+		bt *= bt1;
+	}
+}
+
+void BigInt::Power(BigInt &bt,BigInt &bt1,BigInt &bt2)
+{
+	bt.push_back('+');
+	bt.push_back('1');
+	string str = "0";
+	BigInt i(str);
+	for(; i < bt2; ++i)
+	{
+		bt *= bt1;
 	}
 }
