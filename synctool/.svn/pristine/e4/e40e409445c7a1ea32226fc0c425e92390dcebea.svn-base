@@ -1,0 +1,23 @@
+#ifndef __NFSUTILS__
+#define __NFSUTILS__
+
+
+#include <string>
+
+//server side 
+class nfsutils
+{
+    public:
+        static int nfsstart();
+        static int nfsstop();
+        static int nfsstatus();
+
+        static int confignfs(string sharedir, string nfsopts);
+
+        //client side 
+        static int mountnfs(string nfsloc, string sharedir, 
+                string mpt, string mountopts="");
+        static int ismounted(string nfsloc, string sharedir, string mpt);
+        static int umount(string mpt, int isforce);
+};
+#endif

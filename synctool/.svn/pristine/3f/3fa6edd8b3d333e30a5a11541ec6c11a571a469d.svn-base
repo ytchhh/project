@@ -1,0 +1,74 @@
+#include "command.h"
+
+
+SyncCommand::SyncCommand(string host, string sharedir)
+{
+
+}
+
+int SyncCommand::execute()
+{
+    return 0;
+}
+
+~SyncCommand()
+{
+}
+
+SyncCommand* SyncCommand::createcmd(string host, string sharedir)
+{
+    return NULL;
+}
+
+PkgCommand::PkgCommand(string pkgfile)
+{
+
+}
+int PkgCommand::execute()
+{
+    return 0;
+}
+
+
+PkgCommand* PkgCommand::createcmd(string pkgfile)
+{
+    return NULL;
+}
+
+UpdateCommand(string pkgfile)
+{
+}
+
+int UpdateCommand::execute()
+{
+    return 0;
+}
+
+UpdateCommand* UpdateCommand::createcmd(string pkgfile)
+{
+    return NULL;
+}
+
+ScriptCommand::ScriptCommand(string scriptdir)
+{
+
+}
+
+int ScriptCommand::execute()
+{
+    return 0;
+}
+
+ScriptCommand* ScriptCommand::createcmd(string scriptdir)
+{
+    return NULL;
+}
+
+
+deque<Command*> extractmsg(char* buff, int bufflen)
+{
+    deque<Command*> commands;
+
+    return commands;
+}
+

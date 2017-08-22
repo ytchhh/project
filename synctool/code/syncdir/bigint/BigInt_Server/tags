@@ -1,0 +1,128 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADD	BigIntSer.cpp	/^typedef enum {ADD=1,SUB, MUL, DIV} OPER;$/;"	e	enum:__anon3	file:
+ADD	sock.h	/^typedef enum {ADD,SUB,MUL,DIV,QUIT}OPER_ENUM;$/;"	e	enum:__anon4
+Add	BigInt/BigInt.cpp	/^void BigInt::Add(BigInt &bt, const BigInt &bt1, const BigInt &bt2)$/;"	f	class:BigInt
+AddItem	BigInt/BigInt.cpp	/^u_char BigInt::AddItem(u_char a, u_char b, u_char &sign)$/;"	f	class:BigInt
+AddMove	BigInt/BigInt.cpp	/^void BigInt::AddMove(BigInt &bt, const BigInt &bt1, int offset)$/;"	f	class:BigInt
+BUFFER_SIZE	sock.h	18;"	d
+BigInt	BigInt/BigInt.cpp	/^BigInt::BigInt(long value)$/;"	f	class:BigInt
+BigInt	BigInt/BigInt.h	/^class BigInt$/;"	c
+BigIntCopy	BigInt/BigInt.cpp	/^void BigInt::BigIntCopy(char *buf, size_t len, size_t &pos)$/;"	f	class:BigInt
+BigIntOper	sock.h	/^typedef struct BigIntOper$/;"	s
+BigIntOper	sock.h	/^}BigIntOper;$/;"	t	typeref:struct:BigIntOper
+BigIntServer	sock.cpp	/^void* BigIntServer(void *arg)$/;"	f
+Clear	BigInt/BigInt.cpp	/^void BigInt::Clear()$/;"	f	class:BigInt
+DEFAULT_SIZE	BigInt/SeqList.h	/^	enum{DEFAULT_SIZE = 10, INC_SIZE = 5};$/;"	e	enum:SeqList::__anon1
+DIV	BigIntSer.cpp	/^typedef enum {ADD=1,SUB, MUL, DIV} OPER;$/;"	e	enum:__anon3	file:
+DIV	sock.h	/^typedef enum {ADD,SUB,MUL,DIV,QUIT}OPER_ENUM;$/;"	e	enum:__anon4
+Data_Handler	BigIntSer.cpp	/^void Data_Handler(BigInt &bt, BigInt &bt1, BigInt &bt2, OPER &oper)$/;"	f
+Div	BigInt/BigInt.cpp	/^void BigInt::Div(BigInt &bt, const BigInt &bt1, const BigInt &bt2)$/;"	f	class:BigInt
+GetSymbol	BigInt/BigInt.cpp	/^Symbol BigInt::GetSymbol()const$/;"	f	class:BigInt
+GetSymbol	BigInt/SeqList.h	/^Symbol SeqList<Type>::GetSymbol()const$/;"	f	class:SeqList
+Html_Header	BigIntSer.cpp	/^void Html_Header()$/;"	f
+INC_SIZE	BigInt/SeqList.h	/^	enum{DEFAULT_SIZE = 10, INC_SIZE = 5};$/;"	e	enum:SeqList::__anon1
+Inc	BigInt/SeqList.h	/^	bool Inc()$/;"	f	class:SeqList
+LISTEN_QUEUE	sock.h	16;"	d
+LoadData	BigInt/BigInt.cpp	/^void BigInt::LoadData(size_t sz)$/;"	f	class:BigInt
+MUL	BigIntSer.cpp	/^typedef enum {ADD=1,SUB, MUL, DIV} OPER;$/;"	e	enum:__anon3	file:
+MUL	sock.h	/^typedef enum {ADD,SUB,MUL,DIV,QUIT}OPER_ENUM;$/;"	e	enum:__anon4
+Mod	BigInt/BigInt.cpp	/^void BigInt::Mod(BigInt &bt, const BigInt &bt1, const BigInt &bt2)$/;"	f	class:BigInt
+Mul	BigInt/BigInt.cpp	/^void BigInt::Mul(BigInt &bt, const BigInt &bt1, const BigInt &bt2)$/;"	f	class:BigInt
+MulItem	BigInt/BigInt.cpp	/^void BigInt::MulItem(BigInt &bt, const BigInt &bt1, u_char x)$/;"	f	class:BigInt
+NEGATIVE	BigInt/utili.h	/^typedef enum{POSITIVE, NEGATIVE}Symbol;$/;"	e	enum:__anon2
+OBJECT	Makefile	/^OBJECT=.\/BigInt\/BigInt.o$/;"	m
+OPER	BigIntSer.cpp	/^typedef enum {ADD=1,SUB, MUL, DIV} OPER;$/;"	t	typeref:enum:__anon3	file:
+OPER_ENUM	sock.h	/^typedef enum {ADD,SUB,MUL,DIV,QUIT}OPER_ENUM;$/;"	t	typeref:enum:__anon4
+POSITIVE	BigInt/utili.h	/^typedef enum{POSITIVE, NEGATIVE}Symbol;$/;"	e	enum:__anon2
+PowMod	BigInt/BigInt.cpp	/^void BigInt::PowMod(BigInt &bt, BigInt &a, BigInt &b, const BigInt &n)$/;"	f	class:BigInt
+Power	BigInt/BigInt.cpp	/^void BigInt::Power(BigInt &bt, const BigInt &bt1, const BigInt &bt2)$/;"	f	class:BigInt
+Power	BigInt/BigInt.cpp	/^void BigInt::Power(BigInt &bt, const BigInt &bt1, u_long n)$/;"	f	class:BigInt
+PrintData	BigInt/BigInt.cpp	/^void BigInt::PrintData()const$/;"	f	class:BigInt
+QUIT	sock.h	/^typedef enum {ADD,SUB,MUL,DIV,QUIT}OPER_ENUM;$/;"	e	enum:__anon4
+RecvData	sock.cpp	/^void RecvData(int sockConn, BigInt &bt)$/;"	f
+SERVER_IP	sock.h	14;"	d
+SERVER_PORT	sock.h	15;"	d
+SUB	BigIntSer.cpp	/^typedef enum {ADD=1,SUB, MUL, DIV} OPER;$/;"	e	enum:__anon3	file:
+SUB	sock.h	/^typedef enum {ADD,SUB,MUL,DIV,QUIT}OPER_ENUM;$/;"	e	enum:__anon4
+SendData	sock.cpp	/^void SendData(int sockConn, BigInt *pbt)$/;"	f
+SeqList	BigInt/SeqList.h	/^SeqList<Type>::SeqList(const SeqList<Type> &bt)$/;"	f	class:SeqList
+SeqList	BigInt/SeqList.h	/^SeqList<Type>::SeqList(size_t sz)$/;"	f	class:SeqList
+SeqList	BigInt/SeqList.h	/^class SeqList$/;"	c
+SetSymbol	BigInt/BigInt.cpp	/^void BigInt::SetSymbol(Symbol sign)$/;"	f	class:BigInt
+SetSymbol	BigInt/SeqList.h	/^void SeqList<Type>::SetSymbol(Symbol sign)$/;"	f	class:SeqList
+Show_Result	BigIntSer.cpp	/^void Show_Result(const BigInt &bt, const BigInt &bt1, const BigInt &bt2, OPER oper)$/;"	f
+Square	BigInt/BigInt.cpp	/^void BigInt::Square(BigInt &bt, const BigInt &bt1)$/;"	f	class:BigInt
+Sub	BigInt/BigInt.cpp	/^void BigInt::Sub(BigInt &bt, const BigInt &bt1, const BigInt &bt2)$/;"	f	class:BigInt
+SubItem	BigInt/BigInt.cpp	/^u_char BigInt::SubItem(u_char a, u_char b, u_char &sign)$/;"	f	class:BigInt
+Symbol	BigInt/utili.h	/^typedef enum{POSITIVE, NEGATIVE}Symbol;$/;"	t	typeref:enum:__anon2
+_SOCK_H	sock.h	2;"	d
+_UTILI_H	BigInt/utili.h	2;"	d
+back	BigInt/BigInt.cpp	/^u_char BigInt::back()const$/;"	f	class:BigInt
+back	BigInt/SeqList.h	/^typename SeqList<Type>::const_reference SeqList<Type>::back()const$/;"	f	class:SeqList
+back	BigInt/SeqList.h	/^typename SeqList<Type>::reference SeqList<Type>::back()$/;"	f	class:SeqList
+base	BigInt/SeqList.h	/^	Type   *base;$/;"	m	class:SeqList
+big	BigInt/BigInt.h	/^	SeqList<u_char> big;$/;"	m	class:BigInt
+bt1	sock.h	/^    BigInt *bt1;$/;"	m	struct:BigIntOper
+bt2	sock.h	/^    BigInt *bt2;$/;"	m	struct:BigIntOper
+capacity	BigInt/SeqList.h	/^	size_t capacity;$/;"	m	class:SeqList
+clear	BigInt/BigInt.cpp	/^void BigInt::clear()$/;"	f	class:BigInt
+clear	BigInt/SeqList.h	/^void SeqList<Type>::clear()$/;"	f	class:SeqList
+clear_head_zero	BigInt/BigInt.cpp	/^void BigInt::clear_head_zero()$/;"	f	class:BigInt
+command	sock.h	/^    OPER_ENUM command;$/;"	m	struct:BigIntOper
+const_reference	BigInt/SeqList.h	/^	typedef const Type& const_reference;$/;"	t	class:SeqList
+erase	BigInt/SeqList.h	/^void SeqList<Type>::erase(const Type &key)$/;"	f	class:SeqList
+find	BigInt/SeqList.h	/^int SeqList<Type>::find(const Type &key)$/;"	f	class:SeqList
+front	BigInt/SeqList.h	/^typename SeqList<Type>::const_reference SeqList<Type>::front()const$/;"	f	class:SeqList
+front	BigInt/SeqList.h	/^typename SeqList<Type>::reference SeqList<Type>::front()$/;"	f	class:SeqList
+len	BigInt/SeqList.h	/^	size_t len;$/;"	m	class:SeqList
+main	BigIntSer.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	sock.cpp	/^int main(int argc, char *argv[])$/;"	f
+operator !=	BigInt/BigInt.cpp	/^bool BigInt::operator!=(const BigInt &bt)const$/;"	f	class:BigInt
+operator %	BigInt/BigInt.cpp	/^BigInt BigInt::operator%(const BigInt &bt)$/;"	f	class:BigInt
+operator %=	BigInt/BigInt.cpp	/^BigInt& BigInt::operator%=(const BigInt &bt)$/;"	f	class:BigInt
+operator &	BigInt/BigInt.cpp	/^bool BigInt::operator&(u_long x)$/;"	f	class:BigInt
+operator *	BigInt/BigInt.cpp	/^BigInt BigInt::operator*(const BigInt &bt)$/;"	f	class:BigInt
+operator *=	BigInt/BigInt.cpp	/^BigInt& BigInt::operator*=(const BigInt &bt)$/;"	f	class:BigInt
+operator +	BigInt/BigInt.cpp	/^BigInt BigInt::operator+(const BigInt &bt)$/;"	f	class:BigInt
+operator ++	BigInt/BigInt.cpp	/^BigInt BigInt::operator++(int)$/;"	f	class:BigInt
+operator ++	BigInt/BigInt.cpp	/^BigInt& BigInt::operator++()$/;"	f	class:BigInt
+operator +=	BigInt/BigInt.cpp	/^BigInt& BigInt::operator+=(const BigInt &bt)$/;"	f	class:BigInt
+operator -	BigInt/BigInt.cpp	/^BigInt BigInt::operator-(const BigInt &bt)$/;"	f	class:BigInt
+operator --	BigInt/BigInt.cpp	/^BigInt BigInt::operator--(int)$/;"	f	class:BigInt
+operator --	BigInt/BigInt.cpp	/^BigInt& BigInt::operator--()$/;"	f	class:BigInt
+operator -=	BigInt/BigInt.cpp	/^BigInt& BigInt::operator-=(const BigInt &bt)$/;"	f	class:BigInt
+operator /	BigInt/BigInt.cpp	/^BigInt BigInt::operator\/(const BigInt &bt)$/;"	f	class:BigInt
+operator /=	BigInt/BigInt.cpp	/^BigInt& BigInt::operator\/=(const BigInt &bt)$/;"	f	class:BigInt
+operator <	BigInt/BigInt.cpp	/^bool BigInt::operator<(const BigInt &bt)const$/;"	f	class:BigInt
+operator <<	BigInt/BigInt.cpp	/^ostream& operator<<(ostream &out, const BigInt &bt)$/;"	f
+operator <=	BigInt/BigInt.cpp	/^bool BigInt::operator<=(const BigInt &bt)const$/;"	f	class:BigInt
+operator =	BigInt/BigInt.cpp	/^BigInt& BigInt::operator=(u_long value)$/;"	f	class:BigInt
+operator =	BigInt/SeqList.h	/^SeqList<Type>& SeqList<Type>::operator=(const SeqList<Type> &st)$/;"	f	class:SeqList
+operator ==	BigInt/BigInt.cpp	/^bool BigInt::operator==(const BigInt &bt)const$/;"	f	class:BigInt
+operator >	BigInt/BigInt.cpp	/^bool BigInt::operator>(const BigInt &bt)const$/;"	f	class:BigInt
+operator >	BigInt/BigInt.cpp	/^bool BigInt::operator>(u_long x)const$/;"	f	class:BigInt
+operator >=	BigInt/BigInt.cpp	/^bool BigInt::operator>=(const BigInt &bt)const$/;"	f	class:BigInt
+operator []	BigInt/BigInt.cpp	/^const u_char& BigInt::operator[](int pos)const$/;"	f	class:BigInt
+operator []	BigInt/BigInt.cpp	/^u_char& BigInt::operator[](int pos)$/;"	f	class:BigInt
+operator []	BigInt/SeqList.h	/^typename SeqList<Type>::const_reference SeqList<Type>::operator[](int pos)const$/;"	f	class:SeqList
+operator []	BigInt/SeqList.h	/^typename SeqList<Type>::reference SeqList<Type>::operator[](int pos)$/;"	f	class:SeqList
+pop_back	BigInt/BigInt.cpp	/^void BigInt::pop_back()$/;"	f	class:BigInt
+pop_back	BigInt/SeqList.h	/^void SeqList<Type>::pop_back()$/;"	f	class:SeqList
+pop_front	BigInt/SeqList.h	/^void SeqList<Type>::pop_front()$/;"	f	class:SeqList
+push_back	BigInt/BigInt.cpp	/^void BigInt::push_back(u_char x)$/;"	f	class:BigInt
+push_back	BigInt/SeqList.h	/^void SeqList<Type>::push_back(const Type &x)$/;"	f	class:SeqList
+push_front	BigInt/BigInt.cpp	/^void BigInt::push_front(u_char x)$/;"	f	class:BigInt
+push_front	BigInt/SeqList.h	/^void SeqList<Type>::push_front(const Type &x)$/;"	f	class:SeqList
+reference	BigInt/SeqList.h	/^	typedef Type& reference;$/;"	t	class:SeqList
+reverse	BigInt/SeqList.h	/^void SeqList<Type>::reverse()$/;"	f	class:SeqList
+size	BigInt/BigInt.cpp	/^size_t BigInt::size()const$/;"	f	class:BigInt
+size	BigInt/SeqList.h	/^size_t SeqList<Type>::size()const$/;"	f	class:SeqList
+sort	BigInt/SeqList.h	/^void SeqList<Type>::sort()$/;"	f	class:SeqList
+u_char	BigInt/utili.h	/^typedef unsigned char u_char;$/;"	t
+u_long	BigInt/utili.h	/^typedef unsigned long u_long;$/;"	t
+~SeqList	BigInt/SeqList.h	/^SeqList<Type>::~SeqList()$/;"	f	class:SeqList

@@ -1,0 +1,33 @@
+#include <vector>
+using namespace std;
+
+#include "strutils.h"
+
+int strutils::startswith(string lhs, string rhs)
+{
+    return 0;
+}
+
+int strutils::endswith(string lhs, string rhs)
+{
+    return 0;
+}
+
+/*
+intstr="a,bc,cc,ddd,eff", separator=","
+{"a", "bc", "cc", "dd", "eff"}
+*/
+
+int strutils::split(string inputstr, string separator,
+        vector<string>& ret) 
+{
+    //do something...
+    //
+    return 0;
+}
+
+int strutils::join(vector<string> strvec, string separator, 
+        string& ret)
+{
+    return 0; 
+}

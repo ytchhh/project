@@ -1,0 +1,1 @@
+:programname, startswith, "laclient" /var/log/utlog.log

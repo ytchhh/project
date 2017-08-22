@@ -1,0 +1,62 @@
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+#include "netutils.h"
+
+int main(int argc, char** argv)
+{
+    int sockfd, bufflen;
+    char* msg;
+
+    msg = netutils::buildmsg(argc, argv, bufflen);
+    if(!msg)
+    {
+        cerr << "can not build messages" << endl;
+        goto ERROR;
+    }
+
+    Message* pmsg;
+    pmsg = (Message*)msg;
+    cout << "buffer:" <<  pmsg->cmd << endl;
+    cout << "buffer machine:" <<  pmsg->tag << endl;
+    
+    //init socket fd to send data
+    sockfd = netutils::initsocket();
+
+    //init dest for sockfd
+    struct sockaddr_in dest;
+    netutils::initdest(dest); 
+
+    int ret;
+    ret = sendto(sockfd, msg, bufflen + 1, 0, 
+            (struct sockaddr*)&dest, sizeof(sockaddr_in));
+
+    if(ret < 0)
+    {
+        perror("sendto");
+        goto ERROR;
+    }
+
+    free(msg);
+    close(sockfd);
+    exit(0);
+
+ERROR:
+    close(sockfd);
+    free(msg);
+    exit(1);
+
+}

@@ -1,0 +1,48 @@
+#ifndef __COMMMAND__
+#define __COMMMAND__
+class Command
+{
+    public:
+        virtual int execute() = 0;
+        virtual ~Command() {};
+};
+
+class SyncCommand: public Command
+{
+    public:
+        SyncCommand(string host, string sharedir); 
+        virtual int execute();
+        virtual ~SyncCommand();
+        static SyncCommand* createcmd(string host, string sharedir);
+};
+
+class PkgCommand: public Command
+{
+    public:
+        PkgCommand(string pkgfile);
+        virtual int execute();
+        virtual ~PkgCommand() {}
+        static PkgCommand* createcmd(string pkgfile);
+};
+
+class UpdateCommand: public Command
+{
+    public:
+        UpdateCommand(string pkgfile);
+        virtual int execute();
+        virtual ~UpdateCommand() {}
+        static UpdateCommand* createcmd(string pkgfile);
+};
+
+class ScriptCommand: public Command
+{
+    public:
+        ScriptCommand(string scriptdir);
+        virtual int execute();
+        virtual ~ScriptCommand() {}
+        static ScriptCommand* createcmd(string scriptdir);
+};
+
+deque<Command*> extractmsg(char* buff, int bufflen)
+
+#endif
