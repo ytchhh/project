@@ -4,10 +4,10 @@
 
 
 ///////////////////////////////////////////////
-Local network host management toolkit
-Supported OS:
-RHEL/CentOS/Fedora
-Debian/Ubuntu/LinuxMint
+		Local network host management toolkit
+		Supported OS:
+		RHEL/CentOS/Fedora
+		Debian/Ubuntu/LinuxMint
 
 		a. file synchronization
 		b. software management(install/remove/update)
